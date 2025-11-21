@@ -14,11 +14,15 @@ switch to new database: \c <database_name>
 
 select * from sales;
 
-################################################3
+################################################
 git init
-git add README.md
-git commit -m "first commit"
-git branch -M main
-git remote add origin https://github.com/sunnyygautam/postgresql.git
-git push -u origin main
 
+git add README.md
+
+git commit -m "first commit"
+
+git branch -M main
+
+git remote add origin https://github.com/sunnyygautam/postgresql.git
+
+git push -u origin main
