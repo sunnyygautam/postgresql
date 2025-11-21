@@ -15,6 +15,7 @@ switch to new database: \c <database_name>
 select * from sales;
 
 ################################################
+
 git init
 
 git add README.md
