@@ -36,3 +36,15 @@
 - git fetch
   - This command downloads the latest changes from the remote repository to your local repository
   - git pull is a convenience command that effectively combines git fetch and git merge into a single operation
+ 
+- Git merge creates a new commit that combines changes from two branches while preserving the original commit history of both branches. 
+- Git rebase, on the other hand, rewrites commit history by taking commits from one branch and replaying them on top of another branch.
+
+- Create a new branch without switching to it:
+  - git branch <new-branch-name>
+
+- Create a new branch and immediately switch to it: 
+  - git checkout -b <new-branch-name>
+
+- (From Git version 2.23 onwards) Create a new branch and immediately switch to it using git switch:
+  - git switch -c <new-branch-name>
