@@ -83,3 +83,26 @@ try:
 except ClientError as e:
     print(f"❌ Error: {e}")
 ````
+**Add EBS volume size:**
+````
+BlockDeviceMappings=[
+    {
+        'DeviceName': '/dev/xvda',
+        'Ebs': {
+            'VolumeSize': 20,
+            'DeleteOnTermination': True,
+            'VolumeType': 'gp3'
+        }
+    }
+],
+````
+**Add User Data script (for bootstrapping, e.g., install NGINX):**
+````
+UserData='''#!/bin/bash
+yum update -y
+amazon-linux-extras install nginx1 -y
+systemctl start nginx
+systemctl enable nginx
+'''
+````
+
