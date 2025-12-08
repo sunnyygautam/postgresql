@@ -1,0 +1,46 @@
+stages:
+  - install
+  - build
+  - test
+  - deploy
+
+install_job:
+  stage: install
+  script:
+    - echo "Building project $CI_PROJECT_NAME"
+    - sh npm install
+
+build_job:
+  stage: build
+  script:
+    - echo "Building project $CI_PROJECT_NAME"
+    - sh npm run build
+    - mkdir -p build
+    - echo "Compiled files" > build/compiled.txt
+  artifacts:
+    paths:
+      - build/
+    expire_in: 1 week
+  tags:
+    - dev
+
+test_job:
+  stage: test
+  script:
+    - echo "Running tests"
+    - sh npm test
+
+sast_scan:
+  stage: security
+  image: docker:stable
+  services:
+    - docker:dind
+  script:
+    - echo "Running SAST scan..."
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+
+deploy_job:
+  stage: deploy
+  script:
+    - echo "Deploying to production"
