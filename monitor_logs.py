@@ -16,16 +16,17 @@ def send_email(msg):
         s.sendmail(email["From"], [email["To"]], email.as_string())
 
 def monitor():
-    with open(LOG_FILE) as f:
-        f.seek(0, 2)  # Start from end of file
+    with open(LOG_FILE) as file:
+        file.seek(0, 2)  # Start from end of file
         while True:
-            line = f.readline()
+            line = file.readline()
             if not line:
                 time.sleep(1)
                 continue
 
             if PATTERN.search(line):
-                print("Alert:", line.strip())
+#                print("Alert:", line.strip())
+                print(f"ALERT: Error detected -> {line.strip()}")
                 send_email(line.strip())
 
 if __name__ == "__main__":
