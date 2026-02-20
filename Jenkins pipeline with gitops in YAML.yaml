@@ -53,7 +53,7 @@ pipeline:
       - echo: Pipeline executed successfully!
     failure:
       - echo: Pipeline failed!
-	  
+
 #GitOps CD Pipeline YAML
 
 pipeline:
@@ -95,4 +95,3 @@ pipeline:
                 credentialsId: github
                 gitToolName: Default
         - sh: git push origin main
-		
