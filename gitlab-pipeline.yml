@@ -1,46 +1,66 @@
+# GitLab CI/CD pipeline
+
 stages:
   - install
   - build
   - test
   - deploy
 
-install_job:
+# ----------------------------------------
+# 1. Install Dependencies
+# ----------------------------------------
+install_dependencies:
   stage: install
   script:
-    - echo "Building project $CI_PROJECT_NAME"
-    - sh npm install
-
-build_job:
-  stage: build
-  script:
-    - echo "Building project $CI_PROJECT_NAME"
-    - sh npm run build
-    - mkdir -p build
-    - echo "Compiled files" > build/compiled.txt
+    - echo "Installing Node.js dependencies..."
+    - npm ci
+  cache:
+    key: node_modules
+    paths:
+      - node_modules/
   artifacts:
     paths:
-      - build/
-    expire_in: 1 week
-  tags:
-    - dev
+      - node_modules/
+    expire_in: 1 hour
 
-test_job:
+# ----------------------------------------
+# 2. Build Stage
+# ----------------------------------------
+build_app:
+  stage: build
+  script:
+    - echo "Building application..."
+    - npm run build
+  needs:
+    - install_dependencies
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 1 day
+
+# ----------------------------------------
+# 3. Test Stage
+# ----------------------------------------
+run_tests:
   stage: test
   script:
-    - echo "Running tests"
-    - sh npm test
+    - echo "Running test cases..."
+    - npm test
+  needs:
+    - build_app
 
-sast_scan:
-  stage: security
-  image: docker:stable
-  services:
-    - docker:dind
-  script:
-    - echo "Running SAST scan..."
-  rules:
-    - if: '$CI_COMMIT_BRANCH == "main"'
-
-deploy_job:
+# ----------------------------------------
+# 4. Deploy Stage (Manual)
+# ----------------------------------------
+deploy_to_staging:
   stage: deploy
   script:
-    - echo "Deploying to production"
+    - echo "Deploying application to staging..."
+    - ./deploy.sh staging
+  environment:
+    name: staging
+  when: manual
+  only:
+    - main
+  needs:
+    - run_tests
