@@ -94,9 +94,9 @@ JOIN pg_catalog.pg_stat_activity blocking ON blocking.pid = blocking_locks.pid
 WHERE NOT blocked_locks.granted;
 ```
 ### 3. Session Termination Commands
-```sql
-|Command|Action|Impact|
-| -------- | -------- |
-|SELECT pg_cancel_backend(<pid>);|Cancels running query|Session remains connected|
-|SELECT pg_terminate_backend(<pid>);|Force-terminates process|Drops connection immediately|
-```
+
+| Command | Action | Impact |
+| :--- | :--- | :--- |
+| `SELECT pg_cancel_backend(<pid>);` | Cancels running query | Session remains connected |
+| `SELECT pg_terminate_backend(<pid>);` | Force-terminates process | Drops connection immediately |
+
