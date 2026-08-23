@@ -105,3 +105,67 @@ WHERE NOT blocked_locks.granted;
 | `SELECT pg_cancel_backend(<pid>);` | Cancels running query | Session remains connected |
 | `SELECT pg_terminate_backend(<pid>);` | Force-terminates process | Drops connection immediately |
 
+### Terminate All Idle Transactions Older than 5 Minutes
+```sql
+SELECT pg_terminate_backend(pid)
+FROM pg_stat_activity
+WHERE state = 'idle in transaction'
+  AND now() - state_change > INTERVAL '5 minutes';
+```
+### Terminate Active Queries Exceeding 30 Seconds
+```sql
+SELECT pg_terminate_backend(pid) 
+FROM pg_stat_activity 
+WHERE state = 'active' 
+  AND now() - query_start > INTERVAL '30 seconds';
+```
+### 4. Date & Interval Patterns for Operations
+Long-Running Active Queries (> 5 Minutes)
+```sql
+SELECT pid, usename, client_addr, now() - query_start AS runtime, query
+FROM pg_stat_activity
+WHERE state = 'active'
+  AND now() - query_start > INTERVAL '5 minutes'
+ORDER BY runtime DESC;
+```
+### Tables Missing Autovacuum in the Last 7 Days
+```sql
+SELECT relname, last_vacuum, last_autovacuum
+FROM pg_stat_user_tables
+WHERE last_autovacuum < now() - INTERVAL '7 days'
+   OR last_autovacuum IS NULL;
+```
+### Filter Records by Dynamic Rolling Time Window
+```sql
+-- Records created in the last 24 hours
+SELECT application_id, partner_id, status, created_at
+FROM loan_applications
+WHERE status = 'FAILED'
+  AND created_at >= now() - INTERVAL '24 hours';
+
+-- Hourly log aggregation for current date
+SELECT date_trunc('hour', log_timestamp) AS hour_bucket, count(*) AS error_count
+FROM api_logs
+WHERE status_code >= 500
+  AND log_timestamp >= CURRENT_DATE
+GROUP BY hour_bucket
+ORDER BY hour_bucket ASC;
+```
+### 5. Performance Guardrails (postgresql.conf)
+Add these production safeguards to enforce a "fail-fast" policy and prevent cascading pool starvation:
+```bash
+# Maximum execution time allowed for any individual statement (in milliseconds)
+statement_timeout = 3000                           # 3 seconds
+
+# Maximum wait time to acquire a table/row lock before failing
+lock_timeout = 3000                                # 3 seconds
+
+# Maximum time a session can sit idle inside an open transaction
+idle_in_transaction_session_timeout = 5000         # 5 seconds
+```
+### Zero-Downtime Index Creation
+When addressing unindexed query bottlenecks in production, avoid default table-locking operations:
+```sql
+CREATE INDEX CONCURRENTLY idx_table_column 
+ON table_name (column_name);
+```
