@@ -1,14 +1,22 @@
-I have hands-on experience with tools and technologies like Docker, Kubernetes, Jenkins, Git/GitLab, and cloud platforms such as AWS and GCP (BigQuery). I’ve also worked with multiple databases including MySQL, PostgreSQL, MongoDB, and Oracle.
+## 🚀 Summary of Expertise
 
-Application Lifecycle Management (ALM) is the comprehensive, end-to-end process of managing a software application from its initial conception, through development, testing, deployment, and maintenance, troubleshooting.
+### 🛠️ Technical Skills
+* **DevOps & Cloud:** Docker, Kubernetes, Jenkins, Git, GitLab, AWS, GCP (BigQuery)
+* **Databases:** MySQL, PostgreSQL, MongoDB, Oracle
+* **Scripting & Automation:** Shell, Python
+* **Monitoring & Observability:** Grafana, Kibana, Splunk
 
-Scripting like shell, python,creating and maintaining automation scripts using for monitoring and alerting like Grafana , Kibana, Splunk to proactively detect and resolve issues, ensuring the reliability, availability.
+---
 
-//I have worked on the issues related to system, services, deployment process of software application on AWS cloud platform and on-premsis.
+### 💻 Professional Experience & Core Capabilities
 
-I have taken part for automation using ci/cd tool like Jenkins, Gitlab to improve the release process.
+* **Infrastructure & Support:** Managed system, service, and deployment issues for software applications across both **AWS Cloud** and **on-premises** environments.
+* **CI/CD Automation:** Designed and implemented automation pipelines using **Jenkins** and **GitLab CI/CD** to optimize and accelerate the software release process.
+* **Proactive Monitoring:** Created and maintained dynamic dashboards in **Grafana, Kibana, and Splunk** to actively monitor system health, generate alerts, and ensure high availability.
+* **Incident Management:** Handled incident responses, conducted thorough **root cause analysis (RCA)**, and resolved system bottlenecks to minimize downtime.
+* **Cross-Functional Collaboration:** Partnered closely with development, operations, security, and network teams to drive seamless application lifecycles.
 
-Collaborate closely with development, operations, security, network and other stakeholders.
-Incident Management for incident response, root cause analysis.
+---
 
-Monitoring, Creating and maintaining dashboard.
+### 📘 Core Concepts
+* **Application Lifecycle Management (ALM):** Experienced in managing the end-to-end lifecycle of software applications—from initial planning and development through testing, deployment, maintenance, and optimization.
