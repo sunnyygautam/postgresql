@@ -18,6 +18,31 @@ switch to new database: \c <database_name>
 
 select * from sales;
 
+### Rest API sample
+[restful-api.dev](https://restful-api.dev/)
+
+### Run PostgreSQL
+```bash
+# Run PostgreSQL container
+docker run --name postgres-db -e POSTGRES_PASSWORD=admin -p 5432:5432 -d postgres
+
+# Access the container shell (Git Bash / Windows)
+winpty docker exec -it postgres-db bash
+
+# Connect to PostgreSQL CLI
+psql -U postgres
+
+# SQL commands
+CREATE DATABASE salesdb;
+
+# Meta-commands and queries
+\l                          # Show all databases
+\c salesdb                  # Switch to the salesdb database
+\dt                         # Show tables in current database
+SELECT * FROM sales;        # Query the sales table
+```
+
+
 # PostgreSQL Production Troubleshooting & Optimization Runbook
 
 A comprehensive reference guide for Technical Operations and Production Support Engineers covering connection pool exhaustion, locking diagnostics, session management, date-time interval querying, and fail-fast performance guardrails.
