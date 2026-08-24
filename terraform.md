@@ -21,6 +21,7 @@
   infrastructure, creating, modifying, or destroying resources as necessary to bring your infrastructure into alignment with the desired state defined in your Terraform configuration files.
 
 ### Beyond these core commands, other useful commands include:
+```bash
 - terraform fmt: Reformats Terraform configuration files to a canonical style.
 - terraform output: Displays output values from the root module.
 - terraform state: Provides subcommands for advanced state management, such as list, mv (move), and rm (remove).
@@ -28,3 +29,4 @@
 - terraform import: Associates existing infrastructure with a Terraform resource in the state file. 
 - terraform console: Provides an interactive command prompt to evaluate Terraform expressions.
 - terraform login / terraform logout: Manages credentials for remote hosts like Terraform Cloud.
+```
