@@ -1,4 +1,5 @@
 ### Terraform commands.
+```text
 - terraform init:
   - This command initializes a working directory containing Terraform configuration files. Its primary purposes are:
 
@@ -19,7 +20,7 @@
 - Terraform destroy:
   - Destroys previously created infrastructure resources managed by Terraform.
   infrastructure, creating, modifying, or destroying resources as necessary to bring your infrastructure into alignment with the desired state defined in your Terraform configuration files.
-
+```
 ### Beyond these core commands, other useful commands include:
 ```bash
 - terraform fmt: Reformats Terraform configuration files to a canonical style.
